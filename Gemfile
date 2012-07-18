@@ -6,6 +6,7 @@ gem 'heroku', '2.28.12'
 gem 'devise', '2.1.2'
 gem 'devise_invitable', '1.0.2'
 gem 'bcrypt-ruby', '3.0.1'
+gem 'bootstrap-sass', '2.0.0'
 
 # Gems used only for assets and not required
 # in production environments by default.
