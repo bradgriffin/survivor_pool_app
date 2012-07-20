@@ -1,15 +1,5 @@
 SurvivorPoolApp::Application.routes.draw do
-  get "users/new"
-
-  get "users/show"
-
-  get "users/create"
-
-  get "users/edit"
-
-  get "users/update"
-
-  get "users/destroy"
+  resources :users
 
   root to: 'static_pages#home'
 
@@ -19,6 +9,7 @@ SurvivorPoolApp::Application.routes.draw do
   #get "static_pages/terms"
   #get "static_pages/contact"
 
+  match '/signup', to: 'users#new'
   match '/about', to: 'static_pages#about'
   match '/help', to: 'static_pages#help'
   match '/terms', to: 'static_pages#terms'
