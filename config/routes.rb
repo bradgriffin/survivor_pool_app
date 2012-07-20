@@ -1,4 +1,16 @@
 SurvivorPoolApp::Application.routes.draw do
+  get "users/new"
+
+  get "users/show"
+
+  get "users/create"
+
+  get "users/edit"
+
+  get "users/update"
+
+  get "users/destroy"
+
   root to: 'static_pages#home'
 
   #get "static_pages/home"
