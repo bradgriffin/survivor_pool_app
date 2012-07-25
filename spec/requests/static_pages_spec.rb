@@ -39,4 +39,21 @@ describe "Static pages" do
     it { should have_selector('h1',    text: 'Terms') }
     it { should have_selector('title', text: full_title('Terms')) }
   end
+
+  it "should have the right links on the layout" do
+    visit root_path
+    click_link "About"
+    page.should have_selector 'title', text: full_title('About Us')
+    click_link "Contact"
+    page.should have_selector 'title', text: full_title('Contact')
+    click_link "Terms"
+    page.should have_selector 'title', text: full_title('Terms')
+    click_link "Help"
+    page.should have_selector 'title', text: full_title('Help')
+    click_link "Home"
+    click_link "Sign up now!"
+    page.should have_selector 'title', text: full_title('Sign Up')
+    click_link "Survivor Pool"
+    page.should have_selector 'title', text: full_title('')
+  end
 end
