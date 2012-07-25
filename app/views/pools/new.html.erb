@@ -1,0 +1,43 @@
+<%= provide(:title, 'Create Pool') %>
+<h1>Create Pool</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <p>Use the form below to create a new pool and invite your friends. You will need to provide the pool password to any friends that you wish to invite to your pool.</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span6 offset3">
+    <div class="well">
+      <%= form_tag pools_path, :method => :create do %>
+        
+        <div class="field">
+          <%= label_tag :name %>
+          <%= text_field_tag "pools[name]"%>
+        </div>
+
+        <div class="field">
+          <%= label_tag :description %>
+          <%= text_field_tag "pools[description]" %>
+        </div>
+
+        <div class="field">
+          <%= label_tag :password %>
+          <%= password_field_tag "pools[password]" %>
+        </div>
+
+        <div class="field">
+          <%= label_tag :password_confirmation, "Confirm Password" %>
+          <%= password_field_tag "pools[password_confirmation]" %>
+        </div>
+
+        <div class="actions">
+          <%= submit_tag "Add Pool" %>
+        </div><br />
+      <% end %>
+
+      <p>If you would like to join an existing pool, please use this <%= link_to "link", '#' %>.</p>
+    </div>
+  </div>
+</div>

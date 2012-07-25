@@ -11,4 +11,12 @@ FactoryGirl.define do
 			admin true
 		end
 	end
+
+	factory :pool do
+		name "Tester"
+		description "Lorem ipsum"
+		password "foobar"
+		password_confirmation "foobar"
+		user
+	end
 end

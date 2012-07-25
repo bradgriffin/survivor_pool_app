@@ -18,6 +18,7 @@ describe User do
   it { should respond_to(:remember_token) }
   it { should respond_to(:admin) }
   it { should respond_to(:authenticate) }
+  it { should respond_to(:pools) }
 
   it { should be_valid }
   it { should_not be_admin }
@@ -130,6 +131,21 @@ describe User do
         User.new(admin: true)
       end.should raise_error(ActiveModel::MassAssignmentSecurity::Error)
     end    
+  end
+
+  describe "pool associations" do
+    before { @user.save }
+    let!(:pool) do 
+      FactoryGirl.create(:pool, user: @user)
+    end
+    
+    it "should destroy associated pools" do
+      pools = @user.pools
+      @user.destroy
+      pools.each do |pool|
+        Pool.find_by_id(pool.id).should be_nil
+      end
+    end
   end
 end
 
