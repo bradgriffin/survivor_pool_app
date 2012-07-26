@@ -19,4 +19,16 @@ FactoryGirl.define do
 		password_confirmation "foobar"
 		user
 	end
+
+	factory :team do
+		location "City"
+		nickname "Mascot"
+		division "NFL Division"
+		coach "Bob Example"
+		wins_2011 2
+		losses_2011 14
+		wins_2012 4
+		losses_2012 12
+	end
+
 end
