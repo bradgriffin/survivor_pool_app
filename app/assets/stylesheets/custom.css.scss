@@ -184,3 +184,19 @@ input, textarea, select, .uneditable-input {
     }
   }
 }
+
+/* Selections Table */
+table.selections {
+  width: 100%;
+  margin-bottom: 0;
+  white-space: nowrap;
+}
+
+table.selections tr th{
+  text-align: center;
+  border-bottom: 1px solid black;
+
+}
+table.selections tr td {
+  text-align: center;
+}

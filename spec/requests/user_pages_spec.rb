@@ -56,6 +56,8 @@ describe "User pages" do
 
 		it { should have_selector('h1', text: user.username) }
 		it { should have_selector('title', text: user.username) } 
+		it { should have_selector('section', text: user.first_name) } 
+		it { should have_selector('section', text: user.last_name) } 
 	end
 
 	describe "signup page" do
