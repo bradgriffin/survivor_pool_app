@@ -4,6 +4,10 @@ class Pool < ActiveRecord::Base
 	attr_accessible :name, :description, :password, :password_confirmation
 	has_secure_password
 
-	validates_presence_of :name, :description, :user_id
-	validates_uniqueness_of :name
+	before_save { self.name.downcase! }
+
+	validates :name, :description, :password, :password_confirmation, 
+				:user_id, presence: true
+	validates :name, uniqueness: { case_sensitive: false }
+	validates :password, length: { minimum: 4 }
 end

@@ -30,9 +30,64 @@ describe Pool do
     end    
   end
 
+  describe "name address with mixed case" do
+    let(:mixed_case_name) { "My NEw TeAm" }
+
+    it "should be saved as all lower-case" do
+      @pool.name = mixed_case_name
+      @pool.save
+      @pool.reload.name.should == mixed_case_name.downcase
+    end
+  end
+
+  describe "when name is already taken" do
+    before do
+      pool_with_same_name = @pool.dup
+      pool_with_same_name.name = @pool.name.upcase
+      pool_with_same_name.save
+    end
+
+    it { should_not be_valid }
+  end
+
   describe "with blank description" do
     before { @pool.description = " " }
     it { should_not be_valid }
   end
 
+  describe "when password is not present" do
+    before { @pool.password = @pool.password_confirmation = " " }
+      it { should_not be_valid }
+  end
+
+  describe "when password doesn't match confirmation" do
+    before { @pool.password_confirmation = "mismatch" }
+    it { should_not be_valid }
+  end
+
+  describe "when password confirmation is nil" do
+    before { @pool.password_confirmation = nil }
+    it { should_not be_valid }
+  end
+
+  describe "with a password that's too short" do
+    before { @pool.password = @pool.password_confirmation = "a" * 3 }
+    it { should be_invalid }
+  end
+
+  describe "return value of authenticate method" do
+  before { @pool.save }
+  let(:found_pool) { Pool.find_by_name(@pool.name) }
+
+    describe "with valid password" do
+      it { should == found_pool.authenticate(@pool.password) }
+    end
+
+    describe "with invalid password" do
+      let(:pool_for_invalid_password) { found_pool.authenticate("invalid") }
+
+      it { should_not == pool_for_invalid_password }
+      specify { pool_for_invalid_password.should be_false }
+    end
+  end
 end
