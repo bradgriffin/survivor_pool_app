@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   						uniqueness: { case_sensitive: false }
 	validates :password, presence: true, length: { minimum: 6 }
 	validates :password_confirmation, presence: true
+	validates_associated :pools
 
 	private
 

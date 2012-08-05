@@ -1,7 +1,8 @@
 namespace :db do
   desc "Fill database with NFL team data"
   task populate_teams: :environment do
-  	Team.create!(location: "Dallas",
+  	Team.create!(id: 1,
+				 location: "Dallas",
 				 nickname: "Cowboys",
 				 division: "NFC East",
 				 coach: "Jason Garrett",
@@ -197,16 +198,16 @@ namespace :db do
 				 nickname: "Bengals",
 				 division: "AFC North",
 				 coach: "Marvin Lewis",
-				 wins_2011: 12,
-				 losses_2011: 4,
+				 wins_2011: 9,
+				 losses_2011: 7,
 				 wins_2012: 0,
 				 losses_2012: 0)
 	Team.create!(location: "Cleveland",
 				 nickname: "Browns",
 				 division: "AFC North",
 				 coach: "Pat Shurmur",
-				 wins_2011: 12,
-				 losses_2011: 4,
+				 wins_2011: 4,
+				 losses_2011: 12,
 				 wins_2012: 0,
 				 losses_2012: 0)
 	Team.create!(location: "Pittsburgh",

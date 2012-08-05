@@ -20,12 +20,12 @@ describe Team do
   it { should be_valid }
 
   describe "when location is not present" do
-  	before { @team.location = " " }
+  	before { @team.location = "" }
   	it {should_not be_valid}
   end
 
   describe "when nickname is not present" do
-  	before { @team.nickname = " " }
+  	before { @team.nickname = "" }
   	it {should_not be_valid}
   end
 
@@ -40,12 +40,12 @@ describe Team do
   end
 
   describe "when division is not present" do
-  	before { @team.division = " " }
+  	before { @team.division = "" }
   	it {should_not be_valid}
   end
 
   describe "when coach is not present" do
-  	before { @team.coach = " " }
+  	before { @team.coach = "" }
   	it {should_not be_valid}
   end
 
@@ -60,22 +60,27 @@ describe Team do
   end
 
   describe "when 2011 wins is not present" do
-  	before { @team.wins_2011 = " " }
+  	before { @team.wins_2011 = "" }
   	it {should_not be_valid}
   end
 
   describe "when 2011 losses is not present" do
-  	before { @team.losses_2011 = " " }
+  	before { @team.losses_2011 = "" }
   	it {should_not be_valid}
   end
 
   describe "when 2012 wins is not present" do
-  	before { @team.wins_2012 = " " }
+  	before { @team.wins_2012 = "" }
   	it {should_not be_valid}
   end
 
   describe "when 2012 losses is not present" do
-  	before { @team.losses_2012 = " " }
+  	before { @team.losses_2012 = "" }
   	it {should_not be_valid}
+  end
+
+  describe "when 2011 wins and losses combine to more than 16" do
+    before { @team.wins_2011 = 9, @team.losses_2011 = 9 }
+    it { should_not be_valid }
   end
 end
