@@ -31,4 +31,9 @@ FactoryGirl.define do
 		losses_2012 12
 	end
 
+	factory :membership do
+		pool
+		user pool.user
+	end
+
 end

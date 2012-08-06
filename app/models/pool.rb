@@ -1,5 +1,7 @@
 class Pool < ActiveRecord::Base
+	has_many :memberships, dependent: :destroy
 	belongs_to :user
+
 
 	attr_accessible :name, :description, :password, :password_confirmation
 	has_secure_password

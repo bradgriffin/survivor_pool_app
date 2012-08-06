@@ -13,6 +13,8 @@ describe Pool do
   it { should respond_to(:password_confirmation) }
   it { should respond_to(:user_id) }
   it { should respond_to(:user) }
+  it { should respond_to(:authenticate) }
+  it { should respond_to(:memberships) }
   its(:user) { should == user }
 
   it { should be_valid }
@@ -89,5 +91,18 @@ describe Pool do
       it { should_not == pool_for_invalid_password }
       specify { pool_for_invalid_password.should be_false }
     end
+  end
+
+  describe "membership associations" do
+   let!(:pool) { FactoryGirl.create(:pool, user: user) }
+   let!(:membership) { FactoryGirl.create(:membership, pool: pool, user: user) }
+    
+   it "should destroy associated pools" do
+     memberships = pool.memberships
+     pool.destroy
+     memberships.each do |membership|
+       Membership.find_by_id(membership.id).should be_nil
+     end
+  end
   end
 end
