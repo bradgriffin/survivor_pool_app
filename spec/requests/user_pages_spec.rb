@@ -62,10 +62,9 @@ describe "User pages" do
 		it { should have_selector('section', text: user.first_name) } 
 		it { should have_selector('section', text: user.last_name) } 
 
-		describe "when a user has no memberships"
+		describe "when a user has no memberships" do
 			it { should_not have_selector('h1', text: 'Pool Memberships:') }
 		end
-
 	end
 
 	describe "signup page" do
