@@ -1,0 +1,37 @@
+<h1>Join a Pool:</h1>
+<div class="row">
+  <div class="span6 offset3">
+    <p>Please provide the following information to join an existing pool.</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span6 offset3">
+    <div class="well">
+      <%= form_for(:membership, :url => memberships_path) do |f| %>
+      <div class="field">
+        <%= f.label :name %><br />
+          <% unless controller.controller_name == "users" %>
+            <% @linked_pool = Pool.find(params[:id]) %>
+            <% end%>
+        <% if @linked_pool == nil %>
+          <%= f.text_field :test %>
+         <% else %>
+          <%= f.text_field :name, :value => @linked_pool.name %>
+        <% end %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password %><br />
+        <%= f.password_field :password %>
+      </div>
+
+      <div class="field">
+        <%= f.submit "Join", :class => "btn btn-large btn-primary" %>
+      </div>
+      <% end %><br />
+
+      <p>Want to create your own pool? <%= link_to "Create pool now!", new_pool_path %></p>
+    </div>
+  </div>
+</div>

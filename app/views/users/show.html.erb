@@ -1,10 +1,61 @@
 <%= render 'shared/user_header' %><br />
 
-<table class="selections">
-	<tr>
-		<!-- Table Headers -->
-		<th>Pool Name</th>
-		<th>Pool Description</th>
-		<th>Team Name</th>
-	</tr>
-</table>
+<!-- Check to see if the user is a member of any pools. If not, render pool creation/edit page. -->
+<% if @user.memberships.exists? %>
+	
+	<!-- If memberships exist, set those memberships as a variable -->
+	<% @memberships = @user.memberships.find(:all) %>
+
+	<!-- Table header for Pool Memberships -->
+	<table class="front">
+		<tr>
+			<td class="main">
+				<h1 class="selection">Pool Memberships:</h1>
+			</td>
+		</tr>
+	</table>
+
+	<!-- New table for displaying pool memberships, teams, and scores -->
+	<table class="selections">
+		<tr>
+			<!-- Table Headers -->
+			<th>Pool Name</th>
+			<th>Pool Description</th>
+			<th>Team Name</th>
+		</tr>
+
+		<!-- Check to see if correct user for editing memberships and teams. -->
+		<% if correct_user?(@user) %>
+
+			<!-- Check to see if the tourney has started for locking edits. -->
+			<!-- if before_locktime?(@current_time) %> -->
+
+			<!-- Display info about each membership, include an edit link because it is the correct user -->
+				<!-- This code will probably repeat. Candidate for refactoring -->
+				<% @memberships.each do |m| %>
+					<% @pool = Pool.find(m.pool_id) %>
+					<% @teams = @user.teams.find_by_pool_id(m.pool_id) %>
+					<% if !@teams.nil? %>
+						<% for team in [*@teams] %>
+							<% @selection = team.selections %>
+								<tr>
+									<td><%= link_to @pool.name, pool_path(@pool) %></td>
+									<td><%= @pool.description %></td>
+									<td><%= link_to team.name, team_path(team) %></td>
+								</tr>
+							<%  reset_vars() %>
+						<% end %>
+					<% else %> <!-- The user does not have any teams! Should link to create a team. -->
+							<tr>
+								<td><%= @pool.name %></td>
+								<td><%= @pool.description %></td>
+								<td><%= link_to "Create your team", new_team_path %></td>
+							</tr>
+					<% end %>
+				<% end %>
+			<!-- end %> -->
+		<% end %>
+	</table>
+<% else %>
+<%= render 'shared/membership_form.html.erb' %>
+<% end %>
