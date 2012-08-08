@@ -41,9 +41,8 @@
 								<tr>
 									<td><%= link_to @pool.name, pool_path(@pool) %></td>
 									<td><%= @pool.description %></td>
-									<td><%= link_to team.name, team_path(team) %></td>
+									<td><%= link_to entry.name, entry_path(entry) %></td>
 								</tr>
-							<%  reset_vars() %>
 						<% end %>
 					<% else %> <!-- The user does not have any teams! Should link to create a team. -->
 							<tr>

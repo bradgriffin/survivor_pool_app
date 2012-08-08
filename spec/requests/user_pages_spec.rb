@@ -65,6 +65,14 @@ describe "User pages" do
 		describe "when a user has no memberships" do
 			it { should_not have_selector('h1', text: 'Pool Memberships:') }
 		end
+
+		describe "when a user is a member of a pool" do
+			let!(:pool) { FactoryGirl.create(:pool, user: user) }
+   			let!(:membership) { FactoryGirl.create(:membership, pool: pool, user: user) }
+			
+			it { should have_link('Tester', href: pool_path(pool)) }
+		end
+
 	end
 
 	describe "signup page" do
