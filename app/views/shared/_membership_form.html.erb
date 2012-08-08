@@ -14,11 +14,11 @@
           <% unless controller.controller_name == "users" %>
             <% @linked_pool = Pool.find(params[:id]) %>
             <% end%>
-        <% if @linked_pool == nil %>
-          <%= f.text_field :test %>
-         <% else %>
-          <%= f.text_field :name, :value => @linked_pool.name %>
-        <% end %>
+          <% if @linked_pool == nil %>
+            <%= f.text_field :test %>
+           <% else %>
+            <%= f.text_field :name, :value => @linked_pool.name %>
+          <% end %>
       </div>
 
       <div class="field">
