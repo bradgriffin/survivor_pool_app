@@ -69,8 +69,14 @@ describe "User pages" do
 		describe "when a user is a member of a pool" do
 			let!(:pool) { FactoryGirl.create(:pool, user: user) }
    			let!(:membership) { FactoryGirl.create(:membership, pool: pool, user: user) }
-			
+			before do
+				visit user_path(user)
+			end
+
 			it { should have_link('Tester', href: pool_path(pool)) }
+
+			describe "when a user has not created an entry for a pool"
+				it { should have_link('Create your entry', href: new_entry_path) }
 		end
 
 	end
