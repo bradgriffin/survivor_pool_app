@@ -52,12 +52,33 @@ describe "User pages" do
 
 	describe "profile page" do
 		let(:user) { FactoryGirl.create(:user) }
-		before { visit user_path(user)}
+		before do 
+			sign_in user
+			visit user_path(user)
+		end
 
 		it { should have_selector('h1', text: user.username) }
 		it { should have_selector('title', text: user.username) } 
 		it { should have_selector('section', text: user.first_name) } 
 		it { should have_selector('section', text: user.last_name) } 
+
+		describe "when a user has no memberships" do
+			it { should_not have_selector('h1', text: 'Pool Memberships:') }
+		end
+
+		describe "when a user is a member of a pool" do
+			let!(:pool) { FactoryGirl.create(:pool, user: user) }
+   			let!(:membership) { FactoryGirl.create(:membership, pool: pool, user: user) }
+			before do
+				visit user_path(user)
+			end
+
+			it { should have_link('Tester', href: pool_path(pool)) }
+
+			describe "when a user has not created an entry for a pool"
+				it { should have_link('Create your entry', href: new_entry_path) }
+		end
+
 	end
 
 	describe "signup page" do

@@ -19,7 +19,7 @@ describe "Pool pages" do
 
 	    describe "with invalid information" do
 
-	      it "should not create a micropost" do
+	      it "should not create a pool" do
 	        expect { click_button "Add Pool" }.should_not change(Pool, :count)
 	      end
 
@@ -39,5 +39,13 @@ describe "Pool pages" do
 	        	expect { click_button "Add Pool" }.should change(Pool, :count).by(1)
 	      	end
 	    end
+	end
+
+	describe "pool show page" do
+		let!(:pool) { FactoryGirl.create(:pool, user: user) }
+		before { visit pool_path(pool) }
+
+		it { should have_selector('h1', text: 'Rankings') }
+		it { should have_selector('title', text: user.username) }
 	end
 end
