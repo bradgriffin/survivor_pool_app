@@ -32,20 +32,10 @@ describe Pool do
     end    
   end
 
-  describe "name address with mixed case" do
-    let(:mixed_case_name) { "My NEw TeAm" }
-
-    it "should be saved as all lower-case" do
-      @pool.name = mixed_case_name
-      @pool.save
-      @pool.reload.name.should == mixed_case_name.downcase
-    end
-  end
-
   describe "when name is already taken" do
     before do
       pool_with_same_name = @pool.dup
-      pool_with_same_name.name = @pool.name.upcase
+      pool_with_same_name.name = @pool.name
       pool_with_same_name.save
     end
 

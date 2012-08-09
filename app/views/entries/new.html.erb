@@ -1,0 +1,30 @@
+<%= render 'shared/user_header' %>
+
+<h1>Create a New Entry</h1>
+
+<% @memberships.each do |m| %>
+<% @pools_available << Pool.find(m.pool_id) %>
+<% end %>
+
+<div class="row">
+  <div class="span6 offset3">
+    <div class="well">
+      <%= form_tag entries_path, :method => :create do %>
+        
+        <div class="field">
+          <%= label_tag :name %><br />
+          <%= text_field_tag "entries[name]"%>
+        </div>
+
+        <div class="field">
+          <%= label_tag :pool %><br />
+          <%= select_tag "entries[pool_id]", options_from_collection_for_select(@pools_available, "id", "name")%>
+        </div>
+
+        <div class="actions">
+          <%= submit_tag "Add Entry" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -154,6 +154,14 @@ namespace :db do
 				 losses_2011: 3,
 				 wins_2012: 0,
 				 losses_2012: 0)
+	Team.create!(location: "New York",
+				 nickname: "Jets",
+				 division: "AFC East",
+				 coach: "Rex Ryan",
+				 wins_2011: 8,
+				 losses_2011: 8,
+				 wins_2012: 0,
+				 losses_2012: 0)
 	Team.create!(location: "Denver",
 				 nickname: "Broncos",
 				 division: "AFC West",

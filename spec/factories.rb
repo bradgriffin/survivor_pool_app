@@ -33,7 +33,7 @@ FactoryGirl.define do
 
 	factory :membership do
 		pool
-		user pool.user
+		user
 	end
 
 end
