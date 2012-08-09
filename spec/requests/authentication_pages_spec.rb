@@ -80,6 +80,22 @@ describe "Authentication" do
 		        end
       		end
 
+      		describe "in the Entries controller" do
+
+				describe "visiting the new page" do
+					before { visit new_entry_path }
+					it { should have_selector('title', text: 'Sign In') }
+				end
+
+      			describe "submitting to the create action" do
+      				before { post entries_path}
+      				specify { response.should redirect_to(signin_path) }
+  				end  
+
+  				# describe "submitting to the destroy action" do
+  				# open to implement this test
+			end   					
+
 	      	describe "when attempting to visit a protected page" do
 	        	before do
 	          		visit edit_user_path(user)
