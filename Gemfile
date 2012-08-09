@@ -3,8 +3,6 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.2'
 gem 'pg', '0.14.0'
 gem 'heroku', '2.28.12'
-gem 'devise', '2.1.2'
-gem 'devise_invitable', '1.0.2'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'bootstrap-sass', '2.0.0'
 gem 'faker', '1.0.1'
@@ -41,15 +39,17 @@ gem 'jquery-rails', '2.0.2'
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 group :development, :test do
-  gem 'rspec-rails', '2.8.1'
+  gem 'rspec-rails', '2.10.0'
   gem 'guard-rspec', '0.5.5'
 end
 
 group :test do
-  gem 'rspec-rails', '2.8.1'
+  gem 'rspec-rails', '2.10.0'
   gem 'capybara', '1.1.2'
-  gem 'rb-inotify', '0.8.8'
-  gem 'libnotify', '0.5.9'
+  gem 'rb-fsevent', '0.9.1', :require => false
+  gem 'growl', '1.0.3'
+  #gem 'rb-inotify', '0.8.8'
+  #gem 'libnotify', '0.5.9'
   gem 'guard-spork', '0.3.2'
   gem 'spork', '0.9.0'
   gem 'factory_girl_rails', '2.0.0'

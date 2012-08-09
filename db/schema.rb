@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120806015650) do
+ActiveRecord::Schema.define(:version => 20120806021914) do
 
   create_table "memberships", :force => true do |t|
     t.integer  "pool_id"
@@ -30,6 +30,16 @@ ActiveRecord::Schema.define(:version => 20120806015650) do
   end
 
   add_index "pools", ["name"], :name => "index_pools_on_name", :unique => true
+
+  create_table "schedules", :force => true do |t|
+    t.integer  "week"
+    t.date     "date"
+    t.time     "time"
+    t.integer  "away_team_id"
+    t.integer  "home_team_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "teams", :force => true do |t|
     t.string   "location"
