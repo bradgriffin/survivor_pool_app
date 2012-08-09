@@ -15,16 +15,16 @@
 		</tr>
 	</table>
 
-	<!-- New table for displaying pool memberships, teams, and scores -->
+	<!-- New table for displaying pool memberships, entries, and scores -->
 	<table class="selections">
 		<tr>
 			<!-- Table Headers -->
 			<th>Pool Name</th>
 			<th>Pool Description</th>
-			<th>Team Name</th>
+			<th>Entry Name</th>
 		</tr>
 
-		<!-- Check to see if correct user for editing memberships and teams. -->
+		<!-- Check to see if correct user for editing memberships and entries. -->
 		<% if correct_user?(@user) %>
 
 			<!-- Check to see if the tourney has started for locking edits. -->
@@ -34,21 +34,20 @@
 				<!-- This code will probably repeat. Candidate for refactoring -->
 				<% @memberships.each do |m| %>
 					<% @pool = Pool.find(m.pool_id) %>
-					<% @entries = #@user.entries.find_by_pool_id(m.pool_id) %>
+					<% @entries = @user.entries.find_by_pool_id(m.pool_id) %>
 					<% if !@entries.nil? %>
-						<% for team in [*@teams] %>
-							<% @selection = team.selections %>
+						<% for entry in [*@entries] %>
 								<tr>
 									<td><%= link_to @pool.name, pool_path(@pool) %></td>
 									<td><%= @pool.description %></td>
 									<td><%= link_to entry.name, entry_path(entry) %></td>
 								</tr>
 						<% end %>
-					<% else %> <!-- The user does not have any teams! Should link to create a team. -->
+					<% else %> <!-- The user does not have any entries! Should link to create an entry. -->
 							<tr>
-								<td><%= @pool.name %></td>
+								<td><%= link_to @pool.name, pool_path(@pool) %></td>
 								<td><%= @pool.description %></td>
-								<td><%= link_to "Create your team", '#' %></td>
+								<td><%= link_to "Create your entry", new_entry_path %></td>
 							</tr>
 					<% end %>
 				<% end %>
