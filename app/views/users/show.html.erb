@@ -1,4 +1,4 @@
-<%= render 'shared/user_header' %><br />
+<%= render 'shared/user_header', formats: :html, handlers: :erb %><br />
 
 <!-- Check to see if the user is a member of any pools. If not, render pool creation/edit page. -->
 <% if @user.memberships.exists? %>
