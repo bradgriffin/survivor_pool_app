@@ -16,6 +16,8 @@ describe Entry do
   it { should respond_to(:name) }
   it { should respond_to(:pool_id) }
   it { should respond_to(:user_id) }
+  it { should respond_to(:user) }
+  it { should respond_to(:pool) }
 
   it { should be_valid }
 

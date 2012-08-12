@@ -13,6 +13,8 @@ describe Membership do
 
   it { should respond_to(:pool_id) }
   it { should respond_to(:user_id) }
+  it { should respond_to(:pool) }
+  it { should respond_to(:user) }
 
   it { should be_valid }
 

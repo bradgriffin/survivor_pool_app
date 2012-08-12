@@ -16,6 +16,9 @@ describe Team do
   it { should respond_to(:losses_2011) }
   it { should respond_to(:wins_2012) }
   it { should respond_to(:losses_2012) }
+  it { should respond_to(:away_games) }
+  it { should respond_to(:home_games) }
+
 
   it { should be_valid }
 

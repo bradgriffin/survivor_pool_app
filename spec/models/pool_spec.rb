@@ -12,9 +12,10 @@ describe Pool do
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
   it { should respond_to(:user_id) }
-  it { should respond_to(:user) }
   it { should respond_to(:authenticate) }
   it { should respond_to(:memberships) }
+  it { should respond_to(:entries) }
+  it { should respond_to(:user) }
   its(:user) { should == user }
 
   it { should be_valid }

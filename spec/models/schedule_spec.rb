@@ -12,6 +12,9 @@ describe Schedule do
   it { should respond_to(:time) }
   it { should respond_to(:away_team_id) }
   it { should respond_to(:home_team_id) }
+  it { should respond_to(:away_team) }
+  it { should respond_to(:home_team) }
+
 
   it { should be_valid }
 

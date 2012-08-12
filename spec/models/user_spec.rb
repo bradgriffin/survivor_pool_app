@@ -19,6 +19,8 @@ describe User do
   it { should respond_to(:admin) }
   it { should respond_to(:authenticate) }
   it { should respond_to(:pools) }
+  it { should respond_to(:memberships) }
+  it { should respond_to(:entries) }
 
   it { should be_valid }
   it { should_not be_admin }

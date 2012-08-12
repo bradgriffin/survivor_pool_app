@@ -16,6 +16,8 @@ end
 
 class Team < ActiveRecord::Base
 	include ActiveModel::Validations
+	has_many :away_games, class_name: "Schedule", foreign_key: 'away_team_id'
+	has_many :home_games, class_name: "Schedule", foreign_key: 'home_team_id'
 	attr_accessible :location, :nickname, :division, :coach, :wins_2011, :losses_2011, :wins_2012, :losses_2012
 
 	validates :location, :nickname, :division, :coach, :wins_2011, :losses_2011, 
