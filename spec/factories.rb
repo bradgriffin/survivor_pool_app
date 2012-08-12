@@ -21,10 +21,10 @@ FactoryGirl.define do
 	end
 
 	factory :team do
-		location "City"
-		nickname "Mascot"
+		sequence(:location) { |n| "City#{n}" }
+		sequence(:nickname) { |n| "Mascot#{n}" }
 		division "NFL Division"
-		coach "Bob Example"
+		sequence(:coach) { |n| "Example Coach#{n}" }
 		wins_2011 2
 		losses_2011 14
 		wins_2012 4
@@ -36,4 +36,17 @@ FactoryGirl.define do
 		user
 	end
 
+	factory :entry do
+		name "Example Entry"
+		user 
+		pool
+	end
+
+	factory :schedule do
+		week 1
+		date "1/1/2012"
+		time "12:00:00"
+		away_team_id 1
+		home_team_id 2
+	end
 end

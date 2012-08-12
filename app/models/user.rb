@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 	has_many :pools, dependent: :destroy
 	has_many :memberships, :through => :pools
 	has_many :entries, dependent: :destroy
+	has_many :selections, :through => :entries
 	has_secure_password
 
 	before_save { self.email.downcase! }
