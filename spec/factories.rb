@@ -49,4 +49,11 @@ FactoryGirl.define do
 		away_team_id 1
 		home_team_id 2
 	end
+
+	factory :selection do
+		entry
+		user
+		schedule
+		selected_team_id 1
+	end
 end
