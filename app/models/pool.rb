@@ -1,5 +1,6 @@
 class Pool < ActiveRecord::Base
 	has_many :memberships, dependent: :destroy
+	has_many :entries, dependent: :destroy
 	belongs_to :user
 
 
