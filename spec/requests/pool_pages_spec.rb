@@ -47,5 +47,15 @@ describe "Pool pages" do
 
 		it { should have_selector('h1', text: 'Rankings') }
 		it { should have_selector('title', text: user.username) }
+
+		describe "main table" do
+			let(:membership) { FactoryGirl.create(:membership, user: user, pool: pool) }
+  			before { pool.save }
+  			before { membership.save }
+  			before { visit pool_path(pool) }
+
+			it { should have_link(user.username, href: user_path(user)) }
+		end
+
 	end
 end

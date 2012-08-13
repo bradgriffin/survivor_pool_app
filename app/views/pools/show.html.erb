@@ -14,14 +14,21 @@
     <th>Status</th>	
   </tr>
 
+  
+  <!-- Note that this may need to be driven by memberships so that people can 
+      see their pool when users haven't created entries. -->
   <% for entry in [*@entries] %>
   <tr>
     <% @user = User.find(entry.user_id) %>
-  	<td><%= link_to @user.username, "#" %></td>
+  	<td><%= link_to @user.username, user_path(@user) %></td>
   	<td><%= link_to entry.name, "#" %></td>
     <% @selection = Selection.find_by_entry_id(entry.id) %>
-    <% @team = Team.find(@selection.selected_team_id) %>
-  	<td><%= @team.nickname %></td>
+    <% if @selection %>
+      <% @team = Team.find(@selection.selected_team_id) %>
+      <td><%= @team.nickname %></td>
+    <% else %>
+      <td>No Current Selections</td>
+    <% end %>
   	<td>Streak</td>
   	<td>Active</td>
   </tr>
