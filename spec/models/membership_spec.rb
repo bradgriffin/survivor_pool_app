@@ -18,4 +18,14 @@ describe Membership do
 
   it { should be_valid }
 
+  describe "when pool id is not present" do
+    before { @membership.pool_id = "" }
+    it {should_not be_valid}
+  end
+
+  describe "when user id is not present" do
+    before { @membership.user_id = "" }
+    it {should_not be_valid}
+  end
+
 end
