@@ -9,23 +9,21 @@
   <tr>
     <th>User</th>
     <th>Entry</th>
-    <th>Pick</th>
+    <th>Current Week Pick</th>
     <th>Streak</th>
     <th>Status</th>	
   </tr>
 
+  <% for entry in [*@entries] %>
   <tr>
-  	<td>Random User</td>
-  	<td>Random User Picks</td>
-  	<td>Chicago Bears</td>
-  	<td>6 weeks</td>
+    <% @user = User.find(entry.user_id) %>
+  	<td><%= link_to @user.username, "#" %></td>
+  	<td><%= link_to entry.name, "#" %></td>
+    <% @selection = Selection.find_by_entry_id(entry.id) %>
+    <% @team = Team.find(@selection.selected_team_id) %>
+  	<td><%= @team.nickname %></td>
+  	<td>Streak</td>
   	<td>Active</td>
   </tr>
-  <tr>
-  	<td>Random User 2</td>
-  	<td>Random User 2 Picks</td>
-  	<td>Dallas Cowboys</td>
-  	<td>4 weeks</td>
-  	<td>Failed</td>
-  </tr>
+  <% end %>
 </table>
