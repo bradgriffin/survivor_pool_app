@@ -1,1 +1,58 @@
 <%= render 'shared/user_header' %>
+
+<div class="row">
+	<aside class="span4">
+		<table>
+		  <tr>
+		    <td><strong>Pool:</strong></td>
+		    <td></td>
+		    <td><%= link_to @pool.name, pool_path(@pool) %></td>
+		  </tr>
+		  <tr>
+		    <td><strong>Entry Name:</strong></td>
+		    <td></td>
+		    <td><%= @entry.name %></td>
+		  </tr>
+		</table>
+	</aside>
+</div><br />
+
+<div class "row">
+	<div class"span12">
+		<table class="front">
+		  <tr>
+		    <td class="main">
+		      <h1 class="selection">Selections:</h1>
+		    </td>
+		  </tr>
+		</table>
+	</div>
+</div>
+
+<table class="selections">
+  <tr>
+    <th>Week</th>
+    <th>Selected Team</th>
+    <th>Result</th>
+    <% if correct_user?(@user) %>
+    	<th>Edit Selection</th>
+    <% end %>
+  </tr>
+    <% @weeks.each do |f| %>
+      <tr>
+      <% if @entry.selections.exists? %>
+      	<% @display_selection = Team.find(@entry.selections.find_by_week(f).selected_team_id) %>
+      	<td><%= f %></td>
+      	<td><%= @display_selection.location %> <%= @display_selection.nickname %></td>
+      	<td><%= @entry.selections.find_by_week(f) %></td>
+      	<td><%= @display_selection.country_name %></td>
+      	<td><%= link_to "Edit", "#" %></td>
+      <% else %>
+        <td><%= f %></td>
+        <td>None Selected</td>
+        <td>-</td>
+        <td><%= link_to "Edit", "#" %></td>
+      <% end %>
+      </tr>
+    <% end %>
+</table>

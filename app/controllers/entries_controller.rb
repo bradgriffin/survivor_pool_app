@@ -25,6 +25,19 @@ class EntriesController < ApplicationController
 
 	def show
 		@entry = Entry.find(params[:id])
+		@pool = Pool.find(@entry.pool_id)
 		@user = User.find(@entry.user_id)
+		@weeks = (1..17).entries
 	end 
+
+	# private
+
+	# def selection_result(selection, week)
+	# 	@games = Schedule.find_all_by_week(week)
+	# 	@games.each do |g|
+	# 		if g.away_team_id == selection || g.home_team_id == selection
+	# 			g.winning_team
+
+
+
 end
