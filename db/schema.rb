@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120812180525) do
+ActiveRecord::Schema.define(:version => 20120812234556) do
 
   create_table "entries", :force => true do |t|
     t.string   "name"
@@ -38,6 +38,15 @@ ActiveRecord::Schema.define(:version => 20120812180525) do
   end
 
   add_index "pools", ["name"], :name => "index_pools_on_name", :unique => true
+
+  create_table "results", :force => true do |t|
+    t.integer  "away_team_score"
+    t.integer  "home_team_score"
+    t.integer  "winning_team_id"
+    t.integer  "schedule_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
 
   create_table "schedules", :force => true do |t|
     t.integer  "week"
