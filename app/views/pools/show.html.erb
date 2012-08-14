@@ -1,9 +1,6 @@
-<%= render 'shared/user_header.html.erb' %><br />
-<% if @current_memberships == nil %>
-<%= render 'shared/membership_form.html.erb' %>
-<% else %>
+<%= render 'shared/user_header', formats: :html, handlers: :erb %><br />
+
 <h1><%= @current_pool.name %> Rankings</h1>
-<% end %>
 
 <table class="selections">
   <tr>
@@ -14,23 +11,6 @@
     <th>Status</th>	
   </tr>
 
+  <%= render :partial => "membership", :collection => @memberships %>
   
-  <!-- Note that this may need to be driven by memberships so that people can 
-      see their pool when users haven't created entries. -->
-  <% for entry in [*@entries] %>
-  <tr>
-    <% @user = User.find(entry.user_id) %>
-  	<td><%= link_to @user.username, user_path(@user) %></td>
-  	<td><%= link_to entry.name, "#" %></td>
-    <% @selection = Selection.find_by_entry_id(entry.id) %>
-    <% if @selection %>
-      <% @team = Team.find(@selection.selected_team_id) %>
-      <td><%= @team.nickname %></td>
-    <% else %>
-      <td>No Current Selections</td>
-    <% end %>
-  	<td>Streak</td>
-  	<td>Active</td>
-  </tr>
-  <% end %>
 </table>

@@ -43,19 +43,31 @@ describe "Pool pages" do
 
 	describe "pool show page" do
 		let!(:pool) { FactoryGirl.create(:pool, user: user) }
+
 		before { visit pool_path(pool) }
 
 		it { should have_selector('h1', text: 'Rankings') }
 		it { should have_selector('title', text: user.username) }
 
 		describe "main table" do
-			let(:membership) { FactoryGirl.create(:membership, user: user, pool: pool) }
-  			before { pool.save }
-  			before { membership.save }
-  			before { visit pool_path(pool) }
+			it { should_not have_link(user.username) }
 
-			it { should have_link(user.username, href: user_path(user)) }
+			describe "with no entries" do
+				let!(:membership) { FactoryGirl.create(:membership, user: user, pool: pool) }
+				before { visit pool_path(pool) }
+
+				it { should have_link(user.username, href: user_path(user)) }
+				it { should have_content('No entry') }
+			end
+
+			describe "with a valid entry created" do
+				let!(:membership) { FactoryGirl.create(:membership, user: user, pool: pool) }
+  				let!(:entry) { FactoryGirl.create(:entry, user: user, pool: pool) }
+				before { visit pool_path(pool) }
+
+				it { should have_link(user.username, href: user_path(user)) }
+				it { should have_link(entry.name, href: entry_path(entry)) }
+			end
 		end
-
 	end
 end

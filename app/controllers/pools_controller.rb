@@ -29,7 +29,7 @@ class PoolsController < ApplicationController
   def show
     @user = current_user
     @current_pool = Pool.find(params[:id])
-    @current_memberships = @user.memberships.find_all_by_pool_id(params[:id])
     @entries = Entry.find_all_by_pool_id(@current_pool.id)
+    @memberships = Membership.find_all_by_pool_id(params[:id])
   end
 end
