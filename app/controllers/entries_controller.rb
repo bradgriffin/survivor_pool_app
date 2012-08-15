@@ -1,5 +1,6 @@
 class EntriesController < ApplicationController
 	before_filter :signed_in_user, [:new, :create, :destroy]
+	include SelectionsHelper
 
 	def new
 		@user = current_user
@@ -28,6 +29,7 @@ class EntriesController < ApplicationController
 		@pool = Pool.find(@entry.pool_id)
 		@user = User.find(@entry.user_id)
 		@weeks = (1..17).entries
+		@current_time = Time.new
 	end 
 
 	# private

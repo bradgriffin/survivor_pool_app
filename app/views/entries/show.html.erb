@@ -34,9 +34,7 @@
     <th>Week</th>
     <th>Selected Team</th>
     <th>Result</th>
-    <% if correct_user?(@user) %>
-    	<th>Edit Selection</th>
-    <% end %>
+    <th><th>
   </tr>
     <% @weeks.each do |f| %>
       <tr>
@@ -48,10 +46,17 @@
       	<td><%= @display_selection.country_name %></td>
       	<td><%= link_to "Edit", "#" %></td>
       <% else %>
-        <td><%= f %></td>
-        <td>None Selected</td>
-        <td>-</td>
-        <td><%= link_to "Edit", "#" %></td>
+        <% if f === current_week(@current_time) %>
+          <td><%= f %></td>
+          <td><%= link_to "Make your pick", new_selection_path %></td>
+          <td>-</td>
+          <td><%= link_to "Edit", "#" %></td>
+        <% else %>
+          <td><%= f %></td>
+          <td>Selection not available</td>
+          <td>-</td>
+          <td><%= link_to "Edit", "#" %></td>
+        <% end %>
       <% end %>
       </tr>
     <% end %>
