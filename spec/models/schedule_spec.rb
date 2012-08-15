@@ -1,15 +1,13 @@
 require 'spec_helper'
 
 describe Schedule do
-  before { @schedule = Schedule.new(week: 1, date: "2012-09-01", 
-  					time: "12:00:00 CDT", away_team_id: 1, 
-  					home_team_id: 2) }
+  before { @schedule = Schedule.new(week: 1, datetime: "2012-09-01 12:00:00", 
+  					away_team_id: 1, home_team_id: 2) }
 
   subject { @schedule }
 
   it { should respond_to(:week) }
-  it { should respond_to(:date) }
-  it { should respond_to(:time) }
+  it { should respond_to(:datetime) }
   it { should respond_to(:away_team_id) }
   it { should respond_to(:home_team_id) }
   it { should respond_to(:away_team) }
@@ -24,13 +22,8 @@ describe Schedule do
   	it {should_not be_valid}
   end
 
-  describe "when date is not present" do
-  	before { @schedule.date = "" }
-  	it {should_not be_valid}
-  end
-
-  describe "when time is not present" do
-  	before { @schedule.time = "" }
+  describe "when datetime is not present" do
+  	before { @schedule.datetime = "" }
   	it {should_not be_valid}
   end
 

@@ -44,8 +44,7 @@ FactoryGirl.define do
 
 	factory :schedule do
 		week 1
-		date "1/1/2012"
-		time "12:00:00"
+		datetime "1/1/2012 12:00:00"
 		away_team_id 1
 		home_team_id 2
 	end
