@@ -4,6 +4,7 @@ SurvivorPoolApp::Application.routes.draw do
   resources :pools, only: [:new, :create, :destroy, :show]
   resources :memberships, only: [:new, :create, :destroy]
   resources :entries, only: [:new, :create, :destroy, :show]
+  resources :selections, only: [:new, :create, :destroy]
 
   root to: 'static_pages#home'
 
