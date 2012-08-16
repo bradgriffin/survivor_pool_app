@@ -26,7 +26,10 @@ describe User do
   it { should_not be_admin }
 
   describe "with admin attribute set to 'true'" do
-    before { @user.toggle!(:admin) }
+    before do
+      @user.save
+      @user.toggle!(:admin)
+    end
 
     it { should be_admin }
   end
