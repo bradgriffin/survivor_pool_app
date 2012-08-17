@@ -1,0 +1,68 @@
+<div class "row">
+	<div class"span12">
+		<table class="front">
+		  <tr>
+		    <td class="main">
+		      <h1 class="selection">Selections:</h1>
+		    </td>
+		  </tr>
+		</table>
+	</div>
+</div>
+
+<table class="table table-condensed selections">
+  <tr>
+    <th>Week</th>
+    <th>Selected Team</th>
+    <th>Opposing Team</th>
+    <th>Result</th>
+    <th><th>
+  </tr>
+    <% @weeks.each do |f| %>
+      <tr>
+      <% if @entry.selections.exists? %>
+        <% @selected_games = @entry.selections %>
+        <% @selected_games.each do |selection| %>
+          <% @game = Schedule.find(selection.schedule_id) %>
+          <% @selection_week = @game.week %>
+          <% if f === @selection_week %>
+            <% @display_selection = Team.find(selection.selected_team_id) %>
+            <td><%= f %></td>
+            <td><%= @display_selection.location %> <%= @display_selection.nickname %></td>
+            <td>opposing_team(@display_selection)</td>
+            <td>game_result(@game)</td>
+            <td><%= link_to "Edit", "#" %></td>
+          <% else %>
+            <% if f === current_week(@current_time) %>
+              <td><%= f %></td>
+              <td><%= link_to "Make your pick", new_selection_path %></td>
+              <td></td>
+              <td>-</td>
+              <td><%= link_to "Edit", "#" %></td>
+            <% else %>
+              <td><%= f %></td>
+              <td>Selection not available</td>
+              <td></td>
+              <td>-</td>
+              <td><%= link_to "Edit", "#" %></td>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% else %>
+        <% if f === current_week(@current_time) %>
+          <td><%= f %></td>
+          <td><%= link_to "Make your pick", new_selection_path %></td>
+          <td></td>
+          <td>-</td>
+          <td><%= link_to "Edit", "#" %></td>
+        <% else %>
+          <td><%= f %></td>
+          <td>Selection not available</td>
+          <td></td>
+          <td>-</td>
+          <td><%= link_to "Edit", "#" %></td>
+        <% end %>
+      <% end %>
+      </tr>
+    <% end %>
+</table>

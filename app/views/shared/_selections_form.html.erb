@@ -1,0 +1,32 @@
+<table class="available-title">
+  <tr>
+    <td class="main">
+      <h1 class="selection">Make a selection for Week <%= current_week(@current_time) %>:</h1>
+    </td>
+  </tr>
+</table>
+
+<table class="table table-condensed selections">
+ <tr>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Away Team</th>
+    <th>Home Team</th>
+  </tr>
+  <%= form_tag selections_path, :method => :create do %>
+    <% @schedules.each do |schedule| %>
+      <%= hidden_field_tag "entry_id", params[:id] %>
+      <%= hidden_field_tag "schedule_id", schedule.id %>
+      <tr>
+        <td><%= schedule.datetime.to_date %></td>
+        <td><%= schedule.datetime.to_formatted_s(:only_time) %></td>
+        <td><%= radio_button_tag "selected_team_id", schedule.away_team_id %> <%= Team.find(schedule.away_team_id).nickname %></td>
+        <td><%= radio_button_tag "selected_team_id", schedule.home_team_id %> <%= Team.find(schedule.home_team_id).nickname %></td>
+      </tr>
+    <% end %>
+</table>
+
+<div class="actions">
+  <%= submit_tag "Submit" %>
+</div>
+<% end %>
