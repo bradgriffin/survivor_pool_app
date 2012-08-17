@@ -30,6 +30,7 @@ class EntriesController < ApplicationController
 		@user = User.find(@entry.user_id)
 		@weeks = (1..17).entries
 		@current_time = Time.new
+		@schedules = Schedule.find_all_by_week(current_week(@current_time))
 	end 
 
 	# private

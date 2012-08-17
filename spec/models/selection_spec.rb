@@ -9,7 +9,7 @@ describe Selection do
   let(:schedule) { FactoryGirl.create(:schedule) }
   let(:entry) { FactoryGirl.create(:entry, user: user, pool: pool) }
 
-  before { @selection = entry.selections.build(entry_id: entry, user_id: user, 
+  before { @selection = entry.selections.build(user_id: user, 
   						schedule_id: schedule, selected_team_id: team1) }
 
   subject { @selection }
