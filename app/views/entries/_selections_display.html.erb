@@ -1,0 +1,23 @@
+<table class="table table-condensed selections">
+  <tr>
+    <th>Week</th>
+    <th>Selected Team</th>
+    <th>Opposing Team</th>
+    <th>Result</th>
+    <th><th>
+  </tr>
+    <% @weeks.each do |f| %>
+      <tr>
+      <% if has_selections?(@entry) %>
+        <% @selected_games = @entry.selections %>
+        <%= render :partial => "selected_game", :collection => @selected_games, :locals => { :f => f } %>
+      <% else %>
+        <% if is_current_week?(f) %>
+          <%= render 'non_selected_fields', f: f %>
+        <% else %>
+          <%= render 'future_week_fields', f: f %>
+        <% end %>
+      <% end %>
+      </tr>
+    <% end %>
+</table>

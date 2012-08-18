@@ -1,0 +1,24 @@
+<% @game = Schedule.find(selected_game.schedule_id) %>
+<% @selection_week = @game.week %>
+<% if f === @selection_week %>
+  <% @display_selection = Team.find(selected_game.selected_team_id) %>
+  <td><%= f %></td>
+  <td><%= @display_selection.location %> <%= @display_selection.nickname %></td>
+  <td>opposing_team(@display_selection)</td>
+  <td>game_result(@game)</td>
+  <td><%= link_to "Edit", "#" %></td>
+<% else %>
+  <% if f === current_week(@current_time) %>
+    <td><%= f %></td>
+    <td><%= link_to "Make your pick", new_selection_path %></td>
+    <td></td>
+    <td>-</td>
+    <td><%= link_to "Edit", "#" %></td>
+  <% else %>
+    <td><%= f %></td>
+    <td>Selection not available</td>
+    <td></td>
+    <td>-</td>
+    <td><%= link_to "Edit", "#" %></td>
+  <% end %>
+<% end %>
