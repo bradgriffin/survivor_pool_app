@@ -64,11 +64,12 @@ describe "User pages" do
 
 		describe "when a user has no memberships" do
 			it { should_not have_selector('h1', text: 'Pool Memberships:') }
+			it { should have_selector('h1', text: 'Join a Pool:') }
 		end
 
 		describe "when a user is a member of a pool" do
 			let!(:pool) { FactoryGirl.create(:pool, user: user) }
-   			let!(:membership) { FactoryGirl.create(:membership, pool: pool, user: user) }
+   		let!(:membership) { FactoryGirl.create(:membership, pool: pool, user: user) }
 			before do
 				visit user_path(user)
 			end
@@ -78,8 +79,39 @@ describe "User pages" do
 			describe "when a user has not created an entry for a pool"
 				it { should have_link('Create your entry', href: new_entry_path) }
 		end
-
 	end
+
+	describe "show page" do
+		let(:user) { FactoryGirl.create(:user) }
+		let(:user2) { FactoryGirl.create(:user) }
+		before do 
+			sign_in user
+			visit user_path(user2)
+		end
+
+		it { should have_selector('h1', text: user2.username) }
+		it { should have_selector('title', text: user2.username) } 
+		it { should have_selector('section', text: user2.first_name) } 
+		it { should have_selector('section', text: user2.last_name) } 
+
+		describe "when another user has no memberships" do
+			it { should have_selector('p', text: 'does not have any memberships') }
+			it { should_not have_selector('h1', text: 'Join a Pool:') }
+		end
+
+		describe "when another user is a member of a pool" do
+			let!(:pool) { FactoryGirl.create(:pool, user: user2) }
+   		let!(:membership) { FactoryGirl.create(:membership, pool: pool, user: user2) }
+			before do
+				visit user_path(user2)
+			end
+
+			it { should have_link(pool.name, href: pool_path(pool)) }
+
+			describe "when a user has not created an entry for a pool"
+				it { should_not have_link('Create your entry', href: new_entry_path) }
+			end
+		end
 
 	describe "signup page" do
 		before { visit signup_path }

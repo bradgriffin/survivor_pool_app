@@ -9,15 +9,19 @@
 <div class="tabbable"> 
   <ul class="nav nav-tabs">
     <li class="active"><a href="#tab1" data-toggle="tab">Selections</a></li>
-    <li><a href="#tab2" data-toggle="tab">Make a Selection</a></li>
+    <% if correct_user?(@user) %>
+      <li><a href="#tab2" data-toggle="tab">Make a Selection</a></li>
+    <% end %>
   </ul>
   <div class="tab-content">
     <div class="tab-pane active" id="tab1">
       <%= render 'selections_display' %>
     </div>
-    <div class="tab-pane" id="tab2">
-      <%= render 'new_selections_form' %>
-    </div>
+    <% if correct_user?(@user) %>
+      <div class="tab-pane" id="tab2">
+        <%= render 'new_selections_form' %>
+      </div>
+    <% end %>
   </div>
 </div>
 

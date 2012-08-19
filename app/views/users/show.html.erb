@@ -1,56 +1,50 @@
 <%= render 'shared/user_header', formats: :html, handlers: :erb %><br />
 
 <% if @user.memberships.exists? %>
-	<% @memberships = @user.memberships.find(:all) %>
+  <% @memberships = @user.memberships.find(:all) %>
 
-	<!-- Table header for Pool Memberships -->
-	<table class="front">
-		<tr>
-			<td class="main">
-				<h1 class="selection">Pool Memberships:</h1>
-			</td>
-		</tr>
-	</table>
+  <table class="front">
+    <tr>
+      <td class="main">
+        <h1 class="selection">Pool Memberships:</h1>
+      </td>
+    </tr>
+  </table>
 
-	<!-- New table for displaying pool memberships, entries, and scores -->
-	<table class="selections">
-		<tr>
-			<!-- Table Headers -->
-			<th>Pool Name</th>
-			<th>Pool Description</th>
-			<th>Entry Name</th>
-		</tr>
+  <table class="table selections">
+    <tr>
+      <th>Pool Name</th>
+      <th>Pool Description</th>
+      <th>Entry Name</th>
+    </tr>
 
-		<!-- Check to see if correct user for editing memberships and entries. -->
-		<% if correct_user?(@user) %>
-
-			<!-- Check to see if the tourney has started for locking edits. -->
-			<!-- if before_locktime?(@current_time) %> -->
-
-			<!-- Display info about each membership, include an edit link because it is the correct user -->
-				<!-- This code will probably repeat. Candidate for refactoring -->
-				<% @memberships.each do |m| %>
-					<% @pool = Pool.find(m.pool_id) %>
-					<% @entries = @user.entries.find_by_pool_id(m.pool_id) %>
-					<% if !@entries.nil? %>
-						<% for entry in [*@entries] %>
-								<tr>
-									<td><%= link_to @pool.name, pool_path(@pool) %></td>
-									<td><%= @pool.description %></td>
-									<td><%= link_to entry.name, entry_path(entry) %></td>
-								</tr>
-						<% end %>
-					<% else %> <!-- The user does not have any entries! Should link to create an entry. -->
-							<tr>
-								<td><%= link_to @pool.name, pool_path(@pool) %></td>
-								<td><%= @pool.description %></td>
-								<td><%= link_to "Create your entry", new_entry_path %></td>
-							</tr>
-					<% end %>
-				<% end %>
-			<!-- end %> -->
-		<% end %>
-	</table>
+    <% @memberships.each do |m| %>
+      <% @pool = Pool.find(m.pool_id) %>
+      <% @entries = @user.entries.find_by_pool_id(m.pool_id) %>
+      <% if @entries.nil? %>
+        <tr>
+          <td><%= link_to @pool.name, pool_path(@pool) %></td>
+          <td><%= @pool.description %></td>
+          <% if correct_user?(@user) %>
+            <td><%= link_to "Create your entry", new_entry_path %></td>
+          <% else %>
+            <td>No entry</td>
+          <% end %>
+        </tr>
+      <% else %>
+        <% for entry in [*@entries] %>
+          <tr>
+            <td><%= link_to @pool.name, pool_path(@pool) %></td>
+            <td><%= @pool.description %></td>
+            <td><%= link_to entry.name, entry_path(entry) %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    <% end %>
+  </table>
+<% elsif correct_user?(@user) %>
+  <%= render 'shared/membership_form', formats: :html, handlers: :erb %>
 <% else %>
-<%= render 'shared/membership_form', formats: :html, handlers: :erb %>
+<p>This user does not have any memberships!</p>
+<%= link_to "See all Users", users_path %>
 <% end %>

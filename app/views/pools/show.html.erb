@@ -1,8 +1,15 @@
 <%= render 'shared/user_header', formats: :html, handlers: :erb %><br />
 
-<h1><%= @current_pool.name %> Rankings</h1>
+<table class="front">
+		<tr>
+			<td class="main">
+				<h1 class="selection"><%= @current_pool.name %> Rankings:</h1>
+			</td>
+		</tr>
+	</table>
 
-<table class="selections">
+
+<table class="table selections">
   <tr>
     <th>User</th>
     <th>Entry</th>

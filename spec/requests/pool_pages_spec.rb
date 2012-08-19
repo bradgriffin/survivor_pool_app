@@ -60,13 +60,27 @@ describe "Pool pages" do
 				it { should have_content('No entry') }
 			end
 
-			describe "with a valid entry created" do
-				let!(:membership) { FactoryGirl.create(:membership, user: user, pool: pool) }
-  				let!(:entry) { FactoryGirl.create(:entry, user: user, pool: pool) }
+			describe "with a multiple users and multiple valid entries created" do
+				let(:user2) { FactoryGirl.create(:user) }
+				let!(:membership1) { FactoryGirl.create(:membership, user: user, pool: pool) }
+				let!(:membership2) { FactoryGirl.create(:membership, user: user2, pool: pool) }
+  			let!(:entry1) { FactoryGirl.create(:entry, user: user, pool: pool) }
+  			let!(:entry2) { FactoryGirl.create(:entry, user: user2, pool: pool) }
+
 				before { visit pool_path(pool) }
 
 				it { should have_link(user.username, href: user_path(user)) }
-				it { should have_link(entry.name, href: entry_path(entry)) }
+				it { should have_link(user2.username, href: user_path(user2)) }
+				it { should have_link(entry1.name, href: entry_path(entry1)) }
+				it { should have_link(entry2.name, href: entry_path(entry2)) }
+
+				describe "with no entries" do
+					let(:user3) { FactoryGirl.create(:user) }
+					let!(:membership3) { FactoryGirl.create(:membership, user: user3, pool: pool) }
+
+					before { visit pool_path(pool) }
+					it { should have_selector('td', text: 'No entry') }
+				end
 			end
 		end
 	end

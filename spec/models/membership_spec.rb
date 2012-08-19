@@ -6,7 +6,7 @@ describe Membership do
   before do
     user.save
     pool.save
-    @membership = pool.memberships.build(pool_id: pool.id, user_id: user.id)
+    @membership = pool.memberships.build(user_id: user.id)
   end
 
   subject { @membership }
@@ -14,7 +14,6 @@ describe Membership do
   it { should respond_to(:pool_id) }
   it { should respond_to(:user_id) }
   it { should respond_to(:pool) }
-  it { should respond_to(:user) }
 
   it { should be_valid }
 

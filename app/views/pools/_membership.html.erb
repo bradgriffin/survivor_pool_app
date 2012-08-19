@@ -1,7 +1,7 @@
 <% @member_user = User.find(membership.user_id) %>
 <% @entry = @member_user.entries.find_by_pool_id(@current_pool.id) %>
 <tr>
-	<td><%= link_to @user.username, user_path(@member_user) %></td>
+	<td><%= link_to @member_user.username, user_path(@member_user) %></td>
 	<td><%= entry_helper(@entry) %></td>
 	<td><%= selection_helper(@selection) %></td>
 	<td>Streak</td>

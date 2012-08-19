@@ -19,7 +19,6 @@
       <%= form_tag selections_path, :method => :create do %>
         <% @schedules.each do |schedule| %>
           <%= hidden_field_tag "entry_id", params[:id] %>
-          <%= hidden_field_tag "schedule_id", schedule.id %>
           <tr>
             <td><%= schedule.datetime.to_date %></td>
             <td><%= schedule.datetime.to_formatted_s(:only_time) %></td>

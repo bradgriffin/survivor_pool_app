@@ -6,4 +6,5 @@ class Selection < ActiveRecord::Base
 	attr_accessible :user_id, :schedule_id, :selected_team_id
 
 	validates :user_id, :schedule_id, :selected_team_id, :entry_id, presence: true
+
 end

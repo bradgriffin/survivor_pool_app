@@ -15,7 +15,7 @@
             <% @linked_pool = Pool.find(params[:id]) %>
             <% end%>
           <% if @linked_pool == nil %>
-            <%= f.text_field :test %>
+            <%= f.text_field :name %>
            <% else %>
             <%= f.text_field :name, :value => @linked_pool.name %>
           <% end %>

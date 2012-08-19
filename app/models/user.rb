@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 	attr_accessible :first_name, :last_name, :username, :email, :password, :password_confirmation
 	has_many :pools, dependent: :destroy
-	has_many :memberships, :through => :pools
+	has_many :memberships, dependent: :destroy
 	has_many :entries, dependent: :destroy
 	has_many :selections, :through => :entries
 	has_secure_password

@@ -5,8 +5,12 @@ def new
   end
 
   def create
-  	@pool = Pool.first
-  	@membership = @pool.memberships.build(params[:memberships])
+  	@user = current_user
+    pool = Pool.find_by_name(params[:membership][:name])
+  	
+    if pool && pool.authenticate(params[:membership][:password])
+      @membership = pool.memberships.build("user_id" => @user.id)
+    end
 
   	if @membership.save
   		flash[:success] = "You have joined this pool!"
