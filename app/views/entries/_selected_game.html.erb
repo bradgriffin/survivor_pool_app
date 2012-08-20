@@ -4,7 +4,7 @@
   <% @display_selection = Team.find(selected_game.selected_team_id) %>
   <td><%= f %></td>
   <td><%= @display_selection.location %> <%= @display_selection.nickname %></td>
-  <td>opposing_team(@display_selection)</td>
+  <td><%= opposing_team(@display_selection, @game.week) %></td>
   <td>game_result(@game)</td>
 <% else %>
   <% if f === current_week(@current_time) %>

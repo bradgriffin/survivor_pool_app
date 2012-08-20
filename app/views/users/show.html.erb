@@ -42,6 +42,7 @@
       <% end %>
     <% end %>
   </table>
+
 <% elsif correct_user?(@user) %>
   <%= render 'shared/membership_form', formats: :html, handlers: :erb %>
 <% else %>

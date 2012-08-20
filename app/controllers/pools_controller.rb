@@ -1,6 +1,6 @@
 class PoolsController < ApplicationController
   include PoolsHelper
-  before_filter :signed_in_user, only: [:new, :create]
+  before_filter :signed_in_user, only: [:new, :create, :destroy]
   before_filter :pool_admin, only: [:edit, :update, :destroy]
 
   def new
@@ -19,7 +19,7 @@ class PoolsController < ApplicationController
       redirect_to current_user
     else
       flash[:error] = "Try again"
-      redirect_to current_user
+      redirect_to new_pool_path
     end
 
   end
