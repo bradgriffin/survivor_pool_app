@@ -9,17 +9,23 @@
 <div class="tabbable"> 
   <ul class="nav nav-tabs">
     <li class="active"><a href="#tab1" data-toggle="tab">Selections</a></li>
-    <% if correct_user?(@user) %>
+    <% if correct_user?(@user) && !has_selections_for_week?(@entry, current_week(@current_time)) %>
       <li><a href="#tab2" data-toggle="tab">Make a Selection</a></li>
+    <% else %>
+      <li><a href="#tab3" data-toggle="tab">Edit your Selection</a></li>
     <% end %>
   </ul>
   <div class="tab-content">
     <div class="tab-pane active" id="tab1">
       <%= render 'selections_display' %>
     </div>
-    <% if correct_user?(@user) %>
+    <% if correct_user?(@user) && !has_selections_for_week?(@entry, current_week(@current_time)) %>
       <div class="tab-pane" id="tab2">
         <%= render 'new_selections_form' %>
+      </div>
+    <% else %>
+      <div class="tab-pane" id="tab3">
+        <%= render 'update_selections_form' %>
       </div>
     <% end %>
   </div>

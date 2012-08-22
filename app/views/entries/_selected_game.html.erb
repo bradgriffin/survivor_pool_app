@@ -1,11 +1,11 @@
-<% @game = Schedule.find(selected_game.schedule_id) %>
+<% @game = Schedule.find(@selected_game.schedule_id) %>
 <% @selection_week = @game.week %>
 <% if f === @selection_week %>
-  <% @display_selection = Team.find(selected_game.selected_team_id) %>
+  <% @display_selection = Team.find(@selected_game.selected_team_id) %>
   <td><%= f %></td>
   <td><%= @display_selection.location %> <%= @display_selection.nickname %></td>
   <td><%= opposing_team(@display_selection, @game.week) %></td>
-  <td>game_result(@game)</td>
+  <td><%= game_result(@game, @selected_game.selected_team_id) %></td>
 <% else %>
   <% if f === current_week(@current_time) %>
     <td><%= f %></td>

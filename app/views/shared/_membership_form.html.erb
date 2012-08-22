@@ -13,7 +13,7 @@
         <%= f.label :name %><br />
           <% unless controller.controller_name == "users" %>
             <% @linked_pool = Pool.find(params[:id]) %>
-            <% end%>
+          <% end%>
           <% if @linked_pool == nil %>
             <%= f.text_field :name %>
            <% else %>

@@ -7,9 +7,17 @@
   </tr>
     <% @weeks.each do |f| %>
       <tr>
-      <% if has_selections?(@entry) %>
-        <% @selected_games = @entry.selections %>
-        <%= render :partial => "selected_game", :collection => @selected_games, :locals => { :f => f } %>
+      <% if has_selections_for_week?(@entry, f) %>
+        <% selection_by_week(@entry, f) %>
+        <% if @selected_game %>
+        <%= render "selected_game", f: f %>
+        <% else %>
+          <% if is_current_week?(f) %>
+            "Testing1"
+          <% else %>
+            "Testing2"
+          <% end %>
+        <% end %>
       <% else %>
         <% if is_current_week?(f) %>
           <%= render 'non_selected_fields', f: f %>

@@ -10,15 +10,18 @@ def new
   	
     if pool && pool.authenticate(params[:membership][:password])
       @membership = pool.memberships.build("user_id" => @user.id)
-    end
 
-  	if @membership.save
-  		flash[:success] = "You have joined this pool!"
-  		redirect_to current_user
-  	else
-  		flash[:error] = "Please try again"
-  		redirect_to current_user
-  	end
+    	if @membership.save
+    		flash[:success] = "You have joined this pool!"
+    		redirect_to current_user
+    	else
+    		flash[:error] = "Please try again"
+    		redirect_to current_user
+    	end
+    else
+      flash[:error] = "Pool does not exist"
+      redirect_to new_pool_path
+    end
   end
 
   def destroy
