@@ -10,8 +10,7 @@ describe Result do
   let(:entry) { FactoryGirl.create(:entry, user: user, pool: pool) }
   let(:selection) { FactoryGirl.create(:selection, entry: entry, user: user, schedule: schedule) }
 
-  before { @result = schedule.results.build(away_team_score: 24, home_team_score: 21, 
-  						winning_team_id: team1.id) }
+  before { @result = schedule.result }
 
   subject { @result }
 
@@ -23,4 +22,19 @@ describe Result do
   it { should respond_to(:winning_team) }
 
   it { should be_valid }
+
+  describe "when schedule_id is not present" do
+    before { @result.schedule_id = nil }
+    it { should_not be_valid }
+  end
+
+  describe "when away_team_score is not present" do
+    before { @result.away_team_score = nil }
+    it { should_not be_valid }
+  end
+
+  describe "when home_team_score is not present" do
+    before { @result.home_team_score = nil }
+    it { should_not be_valid }
+  end
 end
