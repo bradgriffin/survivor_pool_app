@@ -13,7 +13,7 @@ describe Schedule do
   it { should respond_to(:away_team) }
   it { should respond_to(:home_team) }
   it { should respond_to(:selections) }
-  it { should respond_to(:results) }
+  it { should respond_to(:result) }
 
   it { should be_valid }
 
@@ -35,6 +35,13 @@ describe Schedule do
   describe "when home_team_id is not present" do
   	before { @schedule.home_team_id = "" }
   	it {should_not be_valid}
+  end
+
+  describe 'create_result' do
+    it 'should create an initial result' do
+      @schedule.save
+      @schedule.result.should_not be_nil
+    end
   end
 
 end
