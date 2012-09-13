@@ -38,18 +38,12 @@ module EntriesHelper
   def opposing_team(picked_team, week)
     @team_game = Schedule.find(:all, :conditions => ["week = ? AND (away_team_id = ? OR home_team_id = ?)", 
                               week, picked_team.id, picked_team.id])
-    logger.debug "Set_team_game: #{@team_game.first.away_team}"
     if @team_game.first.away_team_id === picked_team.id
       @opposing_team_id = @team_game.first.home_team_id
-      logger.debug "Matched Away Team: #{@opposing_team_id.methods}"
     else
       @opposing_team_id = @team_game.first.away_team_id
-      logger.debug "Matched Home Team: #{@opposing_team_id.methods}"
     end
-
     @opposing_team = Team.find(@opposing_team_id)
-    #logger.debug "Set opposing team: #{@opposing_team_id.methods}"
-
     return "#{@opposing_team.location} #{@opposing_team.nickname}"
   end 
 

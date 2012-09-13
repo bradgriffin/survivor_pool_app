@@ -1,5 +1,6 @@
 class PoolsController < ApplicationController
   include PoolsHelper
+  include EntriesHelper
   before_filter :signed_in_user, only: [:new, :create, :destroy]
   before_filter :pool_admin, only: [:edit, :update, :destroy]
 
@@ -31,6 +32,7 @@ class PoolsController < ApplicationController
     @user = current_user
     @current_pool = Pool.find(params[:id])
     @entries = Entry.find_all_by_pool_id(@current_pool.id)
+    @current_time = Time.new
     @memberships = Membership.find_all_by_pool_id(params[:id])
   end
 

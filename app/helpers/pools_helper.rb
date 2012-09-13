@@ -18,9 +18,14 @@ module PoolsHelper
   def selection_helper(selection)
     if selection.blank?
       "No current selections"
+    elsif has_selections_for_week?(@entry, current_week(@current_time))
+      selection_by_week(@entry, current_week(@current_time))
+      if @selected_game
+        @display_selection = Team.find(@selected_game.selected_team_id)
+        "#{@display_selection.location} #{@display_selection.nickname}"
+      end
     else
-      @team = Team.find(@selection.selected_team_id)
-      @team.nickname
+      "No Current Selectiond"
     end
   end
 end
