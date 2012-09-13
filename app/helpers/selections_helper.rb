@@ -1,8 +1,4 @@
 module SelectionsHelper
-
-  #def cutoff_times
-  #	Schedule.all
-
   def current_week(time)
   	@week1 = Time.new(2012,9,10,22,15,0,"-05:00")
   	@week2 = Time.new(2012,9,17,22,30,0,"-05:00")

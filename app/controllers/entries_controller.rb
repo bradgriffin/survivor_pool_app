@@ -5,7 +5,7 @@ class EntriesController < ApplicationController
 	def new
 		@user = current_user
 		@memberships = @user.memberships.find(:all)
-    	@pools_available = []
+    @pools_available = []
 	end
 
 	def create
@@ -30,17 +30,7 @@ class EntriesController < ApplicationController
 		@user = User.find(@entry.user_id)
 		@weeks = (1..17).entries
 		@current_time = Time.new
-		@schedules = Schedule.find_all_by_week(current_week(@current_time))
+		@schedules = Schedule.with_current_week
 	end 
-
-	# private
-
-	# def selection_result(selection, week)
-	# 	@games = Schedule.find_all_by_week(week)
-	# 	@games.each do |g|
-	# 		if g.away_team_id == selection || g.home_team_id == selection
-	# 			g.winning_team
-
-
 
 end

@@ -7,4 +7,5 @@ class Selection < ActiveRecord::Base
 
 	validates :user_id, :schedule_id, :selected_team_id, :entry_id, presence: true
 
+
 end
