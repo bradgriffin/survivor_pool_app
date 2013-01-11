@@ -6,8 +6,7 @@
 development:
   adapter: postgresql
   database: survivorpool_development
-  username: postgres
-  password: smokies20
+  username: bradgriffin
   encoding: utf8
   pool: 5
 
@@ -17,15 +16,13 @@ development:
 test:
   adapter: postgresql
   database: survivorpool_test
-  username: postgres
-  password: smokies20
+  username: bradgriffin
   encoding: utf8
   pool: 5
 
 production:
   adapter: postgresql
   database: survivorpool_production
-  password: smokies20
-  username: postgres
+  username: bradgriffin
   encoding: utf8
   pool: 5
