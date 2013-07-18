@@ -1,9 +1,9 @@
 module SelectionsHelper
   def current_week(time)
-  	@week1 = Time.new(2012,9,10,22,15,0,"-05:00")
-  	@week2 = Time.new(2012,9,17,22,30,0,"-05:00")
-  	@week3 = Time.new(2012,9,24,22,30,0,"-05:00")
-  	@week4 = Time.new(2012,10,1,22,30,0,"-05:00")
+  	@week1 = Time.new(2013,9,10,22,15,0,"-05:00")
+  	@week2 = Time.new(2013,9,17,22,30,0,"-05:00")
+  	@week3 = Time.new(2013,9,24,22,30,0,"-05:00")
+  	@week4 = Time.new(2013,10,1,22,30,0,"-05:00")
       
     if time < @week1
       return 1
